@@ -1,10 +1,10 @@
-# team120-PreQL
+# team098-PreQL
 
 ## Basic Information
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-| TeamID      |        Team-120        |
+| TeamID      |        Team-098        |
 | TeamName    |         PreQL          |
 | Captain     |      Praveen Kalva     |
 | Captain     |  spkalva3@illinois.edu |
