@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import GameDetails from './GameDetails';
+import SearchBar from './SearchBar';
+import SearchResults from './SearchResults'
 
 
 function App() {
   const [backendData, setBackendData] = useState([]);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     fetch("/games")
@@ -31,6 +34,11 @@ function App() {
       <div>
         <header className="app-header">
           <h1>SteamEngine</h1>
+          <div>
+            <SearchBar setResults ={setResults}/>
+            <SearchResults results={results}/>
+          </div>
+          
         </header>
         <div className="game-container">
           {backendData.map((game) => (

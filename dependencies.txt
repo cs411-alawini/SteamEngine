@@ -2,3 +2,4 @@ express
 nodemon -D
 cors
 react-router-dom
+react-icons

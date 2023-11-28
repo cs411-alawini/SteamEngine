@@ -1,0 +1,6 @@
+.search-results-item{
+    padding: 5px 20px;
+}
+.search-results-item:hover{
+    background-color: blue;
+}

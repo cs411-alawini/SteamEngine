@@ -12,6 +12,9 @@ body {
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
+    position: sticky;
+    width: 100%;
+    top: 0px;
 }
 
 .game-container {
@@ -50,4 +53,13 @@ body {
     border-radius: 4px;
     margin-top: 10px;
     text-decoration: none;
+}
+
+.search-bar-container {
+    width: 20%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
 }
