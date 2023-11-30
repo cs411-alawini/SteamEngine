@@ -3,3 +3,7 @@ nodemon -D
 cors
 react-router-dom
 react-icons
+axios
+@emotion/react
+@emotion/styled
+@mui/material
