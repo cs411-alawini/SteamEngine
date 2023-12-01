@@ -25,7 +25,7 @@ export const get = async ({
     for (let i = 0; i < tags.length; i++) {
       sql += `Attributes LIKE \"%${tags[i].trim()}%\" `;
       if (i < tags.length - 1) {
-        sql += "OR ";
+        sql += "AND ";
       }
     }
     sql += ") ";

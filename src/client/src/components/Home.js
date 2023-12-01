@@ -1,26 +1,25 @@
 // Home.js
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar";
+import SearchBar from "./SearchBar";
 import SearchResults from "../SearchResults";
-import {getGamesWithFilter} from "../api/game";
+import { getGamesWithFilter } from "../api/game";
 import { CircularProgress } from "@mui/material";
 import GameDisplay from "./GameDisplay";
+import FilterBar from "./FilterBar";
+import "./Home.css";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [tags, setTags] = useState([]);
-  const [minYear, setMinYear] = useState(0);
-  const [maxYear, setMaxYear] = useState(9999);
+  const [yearRange, setYearRange] = useState([1990, 2023]);
   const [mac, setMac] = useState(1);
   const [windows, setWindows] = useState(1);
   const [linux, setLinux] = useState(1);
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(9999);
-  const [requiredAge, setRequiredAge] = useState(999);
-  const [minMetaCritic, setMinMetaCritic] = useState(0);
-  const [maxMetaCritic, setMaxMetaCritic] = useState(101);
+  const [priceRange, setPriceRange] = useState([0, 50]);
+  const [requiredAge, setRequiredAge] = useState(21);
+  const [metaCriticRange, setMetaCriticRange] = useState([20, 101]);
   const [sortBy, setSortBy] = useState("MetaCritic");
   const [sortOrder, setSortOrder] = useState("DESC");
   const [gameResults, setGameResults] = useState([]);
@@ -29,19 +28,20 @@ const Home = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
+        console.log("tags join", tags.join());
         const results = await getGamesWithFilter({
           keyword,
-          tags,
-          minYear,
-          maxYear,
+          tags: tags.join(),
+          minYear: yearRange[0],
+          maxYear: yearRange[1],
           mac,
           windows,
           linux,
-          minPrice,
-          maxPrice,
+          minPrice: priceRange[0],
+          maxPrice: priceRange[1],
           requiredAge,
-          minMetaCritic,
-          maxMetaCritic,
+          minMetaCritic: metaCriticRange[0],
+          maxMetaCritic: metaCriticRange[1],
           sortBy,
           sortOrder,
         });
@@ -56,16 +56,13 @@ const Home = () => {
   }, [
     keyword,
     tags,
-    minYear,
-    maxYear,
+    yearRange,
     mac,
     windows,
     linux,
-    minPrice,
-    maxPrice,
+    priceRange,
     requiredAge,
-    minMetaCritic,
-    maxMetaCritic,
+    metaCriticRange,
     sortBy,
     sortOrder,
   ]);
@@ -73,8 +70,31 @@ const Home = () => {
   return (
     <>
       <SearchBar keyword={keyword} setKeyword={setKeyword} />
-
-      {isLoading ? <CircularProgress /> : <GameDisplay games={gameResults} />}
+      <div className="bottom-container">
+        {isLoading ? <CircularProgress /> : <GameDisplay games={gameResults} />}
+        <FilterBar
+          tags={tags}
+          setTags={setTags}
+          yearRange={yearRange}
+          setYearRange={setYearRange}
+          mac={mac}
+          setMac={setMac}
+          windows={windows}
+          setWindows={setWindows}
+          linux={linux}
+          setLinux={setLinux}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          requiredAge={requiredAge}
+          setRequiredAge={setRequiredAge}
+          metaCriticRange={metaCriticRange}
+          setMetaCriticRange={setMetaCriticRange}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+        />
+      </div>
     </>
   );
 };

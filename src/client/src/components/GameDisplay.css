@@ -4,6 +4,10 @@
     justify-content: space-around;
     background-color: #001326;
     padding: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 75%;
+    float: left;
 }
 
 .game-card {
