@@ -6,8 +6,12 @@
     margin-right: 0px;
     padding-left: 20px;
     padding-right: 25px;
+    padding-bottom: 20px;
     max-width: 18%;
     float: right;
+    background-color: #313838;
+    position: fixed;
+    right: 0px;
 }
 
 .tag-container {
@@ -15,4 +19,5 @@
     flex-wrap: wrap;
     align-items: start;
     width: 100%;
+    
 }

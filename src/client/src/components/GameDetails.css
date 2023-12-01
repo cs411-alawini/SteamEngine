@@ -1,0 +1,91 @@
+.game-page {
+    color: white;
+    
+}
+
+.game-details {
+    color: white;
+}
+
+.game-info-box-wrapper{
+    background-color: #111;
+    width:550px;
+    display: inline-block;
+    margin-bottom: 50px;
+    margin-left: 100px;
+    text-wrap: wrap;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.game-description{
+    display: inline-block;
+    text-align: left;
+    text-wrap: wrap;
+    width:1100px;
+    vertical-align: top;
+    font-size: 18px;
+    text-indent: 40px;
+}
+
+.game-name {
+    color: white;
+    font-size: 40px;
+    text-indent: 40px;
+    text-align: left;
+    top:0;
+}
+
+.vote-wrapper{
+    width: 100px;
+    text-align: center;
+    background-color: #111;
+    box-shadow: 0px 0px 8px #0074cc;
+    border-bottom: 10px solid #111;
+    border-top: 10px solid  #111;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.upvote-button{
+    background-color: green;
+    width:70%;
+    margin:auto;
+    margin-bottom: 20px;
+}
+
+.downvote-button{
+    background-color: red;
+    width:70%;
+    margin:auto;
+    margin-top: 20px;
+}
+
+.comment-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    position: relative;
+    left: 30px;
+    background-color: #111;
+    text-align: left;
+    text-indent: 30px;
+    border-top: 10px solid #111;
+    border-bottom: 10px solid #111;
+    box-shadow: 0px 0px 8px #0074cc;
+    display: inline-block;
+}
+.comment{
+    background-color: #545353;
+    width: 80%;
+    margin: auto;
+    box-shadow: 0px 0px 8px #0074cc;
+    border-bottom: 10px solid #545353;
+    border-top: 10px solid #545353;
+    margin-bottom: 20px;
+    text-indent: 20px;
+}
+.user-wrapper{
+    margin:auto;
+    margin-bottom:20px;
+}

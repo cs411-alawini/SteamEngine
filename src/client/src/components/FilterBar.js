@@ -82,7 +82,7 @@ function FilterBar({
     <div className="filter-bar-container">
       <h2>Advanced Search</h2>
       <Typography id="tags-checkbox" gutterBottom>
-        Tags
+        <b>Tags</b>
       </Typography>
       <div className="tag-container">
         {attributes.map((attribute) => {
@@ -102,13 +102,13 @@ function FilterBar({
                   size="small"
                 />
               }
-              label={<Typography sx={{ fontSize: 8 }}>{attribute}</Typography>}
+              label={<Typography sx={{ fontSize: 10 }}>{attribute.replace("GenreIs","").replace("Category","")}</Typography>}
             />
           );
         })}
       </div>
       <Typography id="platform-switch" gutterBottom>
-        Platform
+        <b>Platform</b>
       </Typography>
       <FormGroup>
         <FormControlLabel
@@ -141,7 +141,7 @@ function FilterBar({
       </FormGroup>
 
       <Typography id="requiredage-slider" gutterBottom>
-        RequiredAge
+        <b>Minimum Required Age</b>
       </Typography>
       <Slider
         value={requiredAge}
@@ -152,7 +152,7 @@ function FilterBar({
       />
 
       <Typography id="year-slider" gutterBottom>
-        Release Year
+        <b>Release Year</b>
       </Typography>
       <Slider
         value={yearRange}
@@ -173,7 +173,7 @@ function FilterBar({
       />
 
       <Typography id="price-slider" gutterBottom>
-        Price
+        <b>Price (USD)</b>
       </Typography>
       <Slider
         value={priceRange}
@@ -194,7 +194,7 @@ function FilterBar({
       />
 
       <Typography id="metacritic-slider" gutterBottom>
-        MetaCritic
+        <b>MetaCritic Score</b>
       </Typography>
       <Slider
         value={metaCriticRange}
@@ -215,7 +215,7 @@ function FilterBar({
       />
 
       <Typography id="sort" gutterBottom>
-        Sort
+        <b>Sort By:</b>
       </Typography>
       <Stack direction="row" spacing={2}>
         <Select

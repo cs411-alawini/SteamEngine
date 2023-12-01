@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import SearchResults from "../SearchResults";
 import { getGamesWithFilter } from "../api/game";
 import { CircularProgress } from "@mui/material";
 import GameDisplay from "./GameDisplay";
