@@ -1,0 +1,6 @@
+.bottom-container {
+  display: inline-block;
+  align-items: start;
+  min-height: 100%;
+  width: 100%;
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import GameDetails from "./components/GameDetails";
-import SearchBar from "./SearchBar";
+import SearchBar from "./components/SearchBar";
 import SearchResults from "./SearchResults";
 import Home from "./components/Home";
 
@@ -15,10 +15,7 @@ function App() {
           <h1>SteamEngine</h1>
         </header>
         <Routes>
-          <Route
-            path="/games/:id"
-            element={<GameDetails />}
-          />
+          <Route path="/games/:id" element={<GameDetails />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
