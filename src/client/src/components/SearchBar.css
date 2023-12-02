@@ -19,19 +19,19 @@
 }
 
 input {
-    background-color: transparent;
-    border: none;
-    height: 100%;
-    font-size: 1.25rem;
-    width: 100%;
-    margin-left: 5px;
-    color: #0074cc;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  font-size: 1.25rem;
+  width: 100%;
+  margin-left: 5px;
+  color: #0074cc;
 }
 
 input:focus {
-    outline: none;
+  outline: none;
 }
 
-#search-icon{
-    color: #0074cc;
+#search-icon {
+  color: #0074cc;
 }

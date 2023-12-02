@@ -65,7 +65,7 @@ function FilterBar({
     activeThumb,
     value,
     setValue,
-    minDistance
+    minDistance,
   ) => {
     if (!Array.isArray(newValue)) {
       return;
@@ -102,7 +102,11 @@ function FilterBar({
                   size="small"
                 />
               }
-              label={<Typography sx={{ fontSize: 10 }}>{attribute.replace("GenreIs","").replace("Category","")}</Typography>}
+              label={
+                <Typography sx={{ fontSize: 10 }}>
+                  {attribute.replace("GenreIs", "").replace("Category", "")}
+                </Typography>
+              }
             />
           );
         })}
@@ -163,7 +167,7 @@ function FilterBar({
             activeThumb,
             yearRange,
             setYearRange,
-            5
+            5,
           )
         }
         valueLabelDisplay="auto"
@@ -184,7 +188,7 @@ function FilterBar({
             activeThumb,
             priceRange,
             setPriceRange,
-            5
+            5,
           )
         }
         valueLabelDisplay="auto"
@@ -205,7 +209,7 @@ function FilterBar({
             activeThumb,
             metaCriticRange,
             setMetaCriticRange,
-            5
+            5,
           )
         }
         valueLabelDisplay="auto"

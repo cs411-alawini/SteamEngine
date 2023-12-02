@@ -1,6 +1,5 @@
-// Home.js
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { getGamesWithFilter } from "../api/game";
 import { CircularProgress } from "@mui/material";
@@ -8,7 +7,7 @@ import GameDisplay from "./GameDisplay";
 import FilterBar from "./FilterBar";
 import "./Home.css";
 
-const Home = () => {
+const Home = ({ loggedIn, email, setLoggedIn, setUsername }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [tags, setTags] = useState([]);
@@ -22,6 +21,16 @@ const Home = () => {
   const [sortBy, setSortBy] = useState("MetaCritic");
   const [sortOrder, setSortOrder] = useState("DESC");
   const [gameResults, setGameResults] = useState([]);
+
+  const navigate = useNavigate();
+
+  const onButtonClick = () => {};
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUsername("");
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,6 +102,18 @@ const Home = () => {
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
         />
+      </div>
+      <div className="top-right">
+        {loggedIn ? (
+          <div className="logged-in-user">
+            <p>Your email address is {email}</p>
+            <button onClick={handleLogout}>Log Out</button>
+          </div>
+        ) : (
+          <Link to="/login" className="login-link">
+            Log in
+          </Link>
+        )}
       </div>
     </>
   );
