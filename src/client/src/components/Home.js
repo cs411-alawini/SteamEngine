@@ -2,8 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import { getGamesWithFilter } from "../api/game";
-import { CircularProgress } from "@mui/material";
+import {
+  getGamesWithFilter,
+  getBestGames,
+  getPopularByAgeGames,
+} from "../api/game";
+import { CircularProgress, Button } from "@mui/material";
 import GameDisplay from "./GameDisplay";
 import FilterBar from "./FilterBar";
 import "./Home.css";
@@ -23,11 +27,32 @@ const Home = () => {
   const [sortOrder, setSortOrder] = useState("DESC");
   const [gameResults, setGameResults] = useState([]);
 
+  const fetchBestGames = async () => {
+    setIsLoading(true);
+    try {
+      const results = await getBestGames();
+      setGameResults(results.data);
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
+  };
+
+  const fetchPopularTeenGames = async () => {
+    setIsLoading(true);
+    try {
+      const results = await getPopularByAgeGames(10, 20);
+      setGameResults(results.data);
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        console.log("tags join", tags.join());
         const results = await getGamesWithFilter({
           keyword,
           tags: tags.join(),
@@ -69,6 +94,12 @@ const Home = () => {
   return (
     <>
       <SearchBar keyword={keyword} setKeyword={setKeyword} />
+      <Button variant="contained" onClick={fetchBestGames}>
+        Find 'Best' Games
+      </Button>
+      <Button variant="contained" onClick={fetchPopularTeenGames}>
+        Find Popular GenZ Games
+      </Button>
       <div className="bottom-container">
         {isLoading ? <CircularProgress /> : <GameDisplay games={gameResults} />}
         <FilterBar

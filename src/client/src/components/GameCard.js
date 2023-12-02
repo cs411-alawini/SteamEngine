@@ -2,7 +2,6 @@ import React from "react";
 import "./GameDisplay.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-
 function GameCard({
   GameID,
   HeaderImageURL,
@@ -13,7 +12,7 @@ function GameCard({
   MetaCritic,
 }) {
   const truncateDescription = (description, maxLength) => {
-    if (description.length > maxLength) {
+    if (description && description.length > maxLength) {
       return `${description.slice(0, maxLength)}...`;
     }
     return description;

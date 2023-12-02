@@ -97,11 +97,12 @@ export const find = async (id) => {
 // ADV QUERY 1: get popular games in age range
 export const getPopularGamesByAge = async (lowerAge, upperAge) => {
   const sql = `
-    SELECT GameID, GameName, SUM(HoursPlayed) as totalHours
+    SELECT * FROM GameInfo g JOIN (
+    SELECT GameID, SUM(HoursPlayed) as totalHours
     FROM PlayTime NATURAL JOIN GameInfo NATURAL JOIN UserProfile
     WHERE Age > ? AND AGE < ?
     GROUP BY GameID, GameName
-    ORDER BY totalHours DESC, GameName ASC`;
+    ORDER BY totalHours DESC, GameName ASC) as PopularGames ON PopularGames.GameID = g.GameID`;
   try {
     const [rows] = await db.execute(sql, [lowerAge, upperAge]);
     return rows;
@@ -113,7 +114,7 @@ export const getPopularGamesByAge = async (lowerAge, upperAge) => {
 // ADV QUERY 2: get best games(top rated and popularity)
 export const getBestGames = async () => {
   const sql =
-    "SELECT g.GameID, g.GameName, g.PlayerEstimate, g.Metacritic, g.ReleaseDate FROM GameInfo g JOIN ((SELECT GameID FROM GameInfo WHERE EXTRACT(YEAR FROM ReleaseDate) >= 2000 ORDER BY PlayerEstimate DESC LIMIT 100) INTERSECT (SELECT GameID FROM GameInfo ORDER BY Metacritic DESC LIMIT 100)) as BestGames ON BestGames.GameID = g.GameID ORDER BY PlayerEstimate DESC, Metacritic DESC, ReleaseDate DESC, GameName ASC";
+    "SELECT * FROM GameInfo g JOIN ((SELECT GameID FROM GameInfo WHERE EXTRACT(YEAR FROM ReleaseDate) >= 2000 ORDER BY PlayerEstimate DESC LIMIT 100) INTERSECT (SELECT GameID FROM GameInfo ORDER BY Metacritic DESC LIMIT 100)) as BestGames ON BestGames.GameID = g.GameID ORDER BY PlayerEstimate DESC, Metacritic DESC, ReleaseDate DESC, GameName ASC";
   try {
     const [rows] = await db.execute(sql);
     return rows;
