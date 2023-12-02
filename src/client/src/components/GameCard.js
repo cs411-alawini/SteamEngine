@@ -2,7 +2,6 @@ import React from "react";
 import "./GameDisplay.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-
 function GameCard({
   GameID,
   HeaderImageURL,

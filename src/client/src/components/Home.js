@@ -1,6 +1,6 @@
 // Home.js
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { getGamesWithFilter } from "../api/game";
 import { CircularProgress } from "@mui/material";
@@ -8,7 +8,7 @@ import GameDisplay from "./GameDisplay";
 import FilterBar from "./FilterBar";
 import "./Home.css";
 
-const Home = () => {
+const Home = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [tags, setTags] = useState([]);
@@ -22,6 +22,11 @@ const Home = () => {
   const [sortBy, setSortBy] = useState("MetaCritic");
   const [sortOrder, setSortOrder] = useState("DESC");
   const [gameResults, setGameResults] = useState([]);
+
+  const { loggedIn, email } = props;
+  const navigate = useNavigate();
+
+  const onButtonClick = () => {};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,6 +99,28 @@ const Home = () => {
           setSortOrder={setSortOrder}
         />
       </div>
+      <div className="top-right">
+        {props.loggedIn ? (
+          <div className="logged-in-user">
+            <p>Your email address is {props.email}</p>
+          </div>
+        ) : (
+          <Link to="/login" className="login-link">
+            Log in
+          </Link>
+        )}
+      </div>
+
+      {/* <div className={"buttonContainer"}>
+            <input
+                className={"inputButton"}
+                type="button"
+                onClick={onButtonClick}
+                value={loggedIn ? "Log out" : "Log in"} />
+            {(loggedIn ? <div>
+                Your email address is {email}
+            </div> : <div/>)}
+        </div> */}
     </>
   );
 };
