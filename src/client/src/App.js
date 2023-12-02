@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -24,12 +23,13 @@ function App() {
                 username={username} 
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
+                setUsername={setUsername} 
               />
             }
           />
           <Route
             path="/login"
-            element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} // Update prop name
+            element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />}
           />
         </Routes>
       </div>

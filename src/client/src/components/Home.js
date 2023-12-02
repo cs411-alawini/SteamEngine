@@ -1,4 +1,3 @@
-// Home.js
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
@@ -8,7 +7,7 @@ import GameDisplay from "./GameDisplay";
 import FilterBar from "./FilterBar";
 import "./Home.css";
 
-const Home = (props) => {
+const Home = ({ loggedIn, email, setLoggedIn, setUsername }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [tags, setTags] = useState([]);
@@ -23,10 +22,15 @@ const Home = (props) => {
   const [sortOrder, setSortOrder] = useState("DESC");
   const [gameResults, setGameResults] = useState([]);
 
-  const { loggedIn, email } = props;
   const navigate = useNavigate();
 
   const onButtonClick = () => {};
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUsername("");
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,9 +104,10 @@ const Home = (props) => {
         />
       </div>
       <div className="top-right">
-        {props.loggedIn ? (
+        {loggedIn ? (
           <div className="logged-in-user">
-            <p>Your email address is {props.email}</p>
+            <p>Your email address is {email}</p>
+            <button onClick={handleLogout}>Log Out</button>
           </div>
         ) : (
           <Link to="/login" className="login-link">
@@ -110,17 +115,6 @@ const Home = (props) => {
           </Link>
         )}
       </div>
-
-      {/* <div className={"buttonContainer"}>
-            <input
-                className={"inputButton"}
-                type="button"
-                onClick={onButtonClick}
-                value={loggedIn ? "Log out" : "Log in"} />
-            {(loggedIn ? <div>
-                Your email address is {email}
-            </div> : <div/>)}
-        </div> */}
     </>
   );
 };
