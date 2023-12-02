@@ -10,10 +10,14 @@
     max-width: 18%;
     float: right;
     background-color: #313838;
+    color: #f0f0f0;
     position: fixed;
-    right: 0px;
-    overflow: scroll;
-    max-height: 670px;
+    top: 66px;
+    right: 0;
+    min-height: calc(80vh - 66px);
+    max-height: 80vh;
+    height: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
 

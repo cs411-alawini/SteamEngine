@@ -12,7 +12,7 @@ function GameCard({
   MetaCritic,
 }) {
   const truncateDescription = (description, maxLength) => {
-    if (description.length > maxLength) {
+    if (description && description.length > maxLength) {
       return `${description.slice(0, maxLength)}...`;
     }
     return description;
