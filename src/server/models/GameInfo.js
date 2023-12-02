@@ -1,5 +1,17 @@
 import db from "../db_connection.js";
 
+export const retrieveGameRatings = async (id) => {
+  const sql = "CALL RetrieveGameRatings(?)";
+  try {
+    const [result] = await db.execute(sql, [id]);
+    // const comments = result[1];
+    const [total_ratings] = result[0];
+    return total_ratings;
+  } catch (err) {
+    throw err;
+  }
+};
+
 // get games that match search criteria
 export const get = async ({
   keyword,
