@@ -8,6 +8,7 @@ const SearchBar = ({ keyword, setKeyword }) => {
   };
 
   return (
+    <div className="search-bar-container">
     <div className="input-wrapper">
       <FaSearch id="search-icon" />
       <input
@@ -15,6 +16,7 @@ const SearchBar = ({ keyword, setKeyword }) => {
         value={keyword}
         onChange={(e) => handleChange(e.target.value)}
       />
+    </div>
     </div>
   );
 };

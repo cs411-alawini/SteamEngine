@@ -1,10 +1,25 @@
 import db from "../db_connection.js";
 
-// get user info
-export const get = async (username, password) => {
-  const sql = `SELECT * FROM UserProfile WHERE Username = ? AND Password = ?`;
+// login
+export const login = async (username, password) => {
+  const sql = `SELECT Password FROM UserProfile WHERE Username = ?`;
   try {
-    const [[row]] = await db.execute(sql, [username, password]);
+    const [[row]] = await db.execute(sql, [username]);
+    if (row.Password === password) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+// get user info
+export const get = async (username) => {
+  const sql = `SELECT * FROM UserProfile WHERE Username = ?`;
+  try {
+    const [[row]] = await db.execute(sql, [username]);
     return row;
   } catch (err) {
     throw err;

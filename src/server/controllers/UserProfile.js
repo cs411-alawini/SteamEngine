@@ -1,10 +1,24 @@
 import * as UserProfile from "../models/UserProfile.js";
 
-export const getUserInfo = async (req, res) => {
+export const login = async (req, res) => {
   const username = req.params.id;
   const { password } = req.query;
   try {
-    const result = await UserProfile.get(username, password);
+    const result = await UserProfile.login(username, password);
+    if (result) {
+      res.status(200).json({ message: "Login successful" });
+    } else {
+      res.status(401).json({ message: "Login failed" });
+    }
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+export const getUserInfo = async (req, res) => {
+  const username = req.params.id;
+  try {
+    const result = await UserProfile.get(username);
     res.status(200).json(result);
   } catch (err) {
     res.status(404).json({ message: err.message });
