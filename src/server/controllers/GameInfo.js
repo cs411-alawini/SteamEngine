@@ -1,5 +1,14 @@
 import * as GameInfo from "../models/GameInfo.js";
 
+export const retrieveGameRatings = async (req, res) => {
+  try {
+    const results = await GameInfo.retrieveGameRatings(req.params.id);
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 export const getGames = async (req, res) => {
   const {
     keyword,
