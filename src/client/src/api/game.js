@@ -10,6 +10,8 @@ export const getGamesWithFilter = async (params) =>
 export const getBestGames = async () => await axios.get(`${gameURL}best`);
 export const getPopularByAgeGames = async (lower, upper) =>
   await axios.get(`${gameURL}popularbyage`, { params: { lower, upper } });
+export const getGameRatings = async (id) =>
+  await axios.get(`${gameURL}gameratings/${id}`);
 
 export const postGame = async (payload) =>
   await axios.post(`${gameURL}`, payload);
