@@ -7,44 +7,44 @@ body {
     overflow-x: hidden;
 }
 
-
-
 .game-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background-color: #001326;
-    padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #001326;
+  padding: 20px;
 }
 
 .game-card {
-    margin: 10px;
-    background-color: #111;
-    color: white;
-    max-width: 300px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  margin: 10px;
+  background-color: #111;
+  color: white;
+  max-width: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .game-card img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .game-details {
-    padding: 15px;
-    text-align: center;
+  padding: 15px;
+  text-align: center;
 }
 
 .show-more-button {
-    background-color: #0074cc;
-    color: white;
-    padding: 8px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    text-decoration: none;
+  background-color: #0074cc;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-decoration: none;
 }
 

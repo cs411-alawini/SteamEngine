@@ -5,7 +5,7 @@ const userURL = `${baseURL}user/`;
 
 export const getUserInfo = async (id) => await axios.get(`${userURL}${id}`);
 export const loginUser = async (id, password) =>
-  await axios.post(`${userURL}login/${id}`, { password });
+  await axios.get(`${userURL}login/${id}`, {params: { password }});
 
 export const getUpvotedGamesFromUser = async (id) =>
   await axios.get(`${userURL}upvoted/${id}`);

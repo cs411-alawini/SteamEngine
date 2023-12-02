@@ -149,7 +149,7 @@ export const update = async (
     PlayerEstimate,
     BackgroundImageURL,
     HeaderImageURL,
-  }
+  },
 ) => {
   const sql = `UPDATE GameInfo SET GameName = ?, Attributes = ?, Description = ?, ReleaseDate = ?, PlatformMac = ?, PlatformWindows = ?, PlatformLinux = ?, Price = ?, RequiredAge = ?, MetaCritic = ?, PlayerEstimate = ?, BackgroundImageURL = ?, HeaderImageURL = ? WHERE GameID = ?`;
   try {
