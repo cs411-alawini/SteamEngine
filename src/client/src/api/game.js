@@ -10,3 +10,9 @@ export const getGamesWithFilter = async (params) =>
 export const getBestGames = async () => await axios.get(`${gameURL}best`);
 export const getPopularByAgeGames = async (lower, upper) =>
   await axios.get(`${gameURL}popularbyage`, { params: { lower, upper } });
+
+export const postGame = async (payload) =>
+  await axios.post(`${gameURL}`, payload);
+export const deleteGame = async (id) => await axios.delete(`${gameURL}${id}`);
+export const updateGame = async (id, payload) =>
+  await axios.put(`${gameURL}${id}`, payload);
