@@ -4,14 +4,13 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import GameDetails from "./components/GameDetails";
 import Home from "./components/Home";
+import PageHeader from "./components/PageHeader"
 
 function App() {
   return (
     <Router>
       <div>
-        <header className="app-header">
-          <h1>SteamEngine</h1>
-        </header>
+        <PageHeader/>
         <Routes>
           <Route path="/games/:id" element={<GameDetails />} />
           <Route path="/" element={<Home />} />
