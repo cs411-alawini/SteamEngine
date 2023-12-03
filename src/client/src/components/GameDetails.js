@@ -2,35 +2,59 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGameById } from "../api/game.js";
 import "./GameDetails.css";
+import CommentForm from "./CommentForm";
+import { postComment, getComments, deleteComment } from "../api/comments";
 import Vote from "./Vote.js";
 
 const GameDetails = ({ loggedIn, username }) => {
   const { id } = useParams();
   const [gameData, setGameData] = useState({});
+  const [comments, setComments] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const results = await getGameById(id);
-        console.log("results", results);
         setGameData(results.data);
+
+        const commentsData = await getComments(id);
+        setComments(commentsData.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
-
-  console.log("id", id);
-
-  // const game = backendData.find((game) => game.GameID === parseInt(id));
-
-  // console.log("game", game);
+  }, [id]);
 
   if (!gameData) {
     return <div>Game not found</div>;
   }
 
-  console.log("gameData", gameData);
+  const handleCommentSubmit = async (commentText) => {
+    try {
+      await postComment({
+        GameID: id,
+        Username: username,
+        CommentText: commentText,
+      });
+
+      const commentsData = await getComments(id);
+      setComments(commentsData.data);
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      console.log("commentId: ", commentId);
+      await deleteComment(commentId);
+      const updatedComments = comments.filter((comment) => comment.id !== commentId);
+      setComments(updatedComments);
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
 
   return (
     <div className="game-page">
@@ -67,19 +91,20 @@ const GameDetails = ({ loggedIn, username }) => {
       <div className="user-wrapper">
         <Vote GameID={id} loggedIn={loggedIn} username={username} />
         <div className="comment-wrapper">
-          <b>Comments (3):</b>
-
-          <div className="comment">
-            <b>Username1:</b> This is a sample comment!
-          </div>
-          <div className="comment">
-            <b>Username2:</b> This is a cool website!
-          </div>
-          <div className="comment">
-            <b>Username3:</b> I like eating crayons!
-          </div>
+          <b>Comments ({comments.length}):</b>
+          {comments.map((comment) => (
+            <div key={comment.id} className="comment">
+              <b>{comment.Username}:</b> {comment.CommentText}
+              {loggedIn && comment.Username === username && (
+                <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+              )}
+            </div>
+          ))}
+          {loggedIn && <CommentForm onSubmit={handleCommentSubmit} />}
         </div>
+        
       </div>
+      
     </div>
   );
 };
