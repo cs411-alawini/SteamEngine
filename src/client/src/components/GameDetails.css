@@ -36,7 +36,7 @@
 }
 
 .vote-wrapper {
-  width: 100px;
+  width: 130px;
   text-align: center;
   background-color: #111;
   box-shadow: 0px 0px 8px #0074cc;
@@ -46,24 +46,24 @@
   display: inline-block;
 }
 
-.upvote-button {
+/* .upvote-button {
   background-color: green;
   width: 70%;
   margin: auto;
   margin-bottom: 20px;
-}
+} */
 
-.downvote-button {
+/* .downvote-button {
   background-color: red;
   width: 70%;
   margin: auto;
   margin-top: 20px;
-}
+} */
 
 .comment-wrapper {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 80%;
   position: relative;
   left: 30px;
   background-color: #111;

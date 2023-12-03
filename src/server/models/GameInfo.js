@@ -4,9 +4,12 @@ export const retrieveGameRatings = async (id) => {
   const sql = "CALL RetrieveGameRatings(?)";
   try {
     const [result] = await db.execute(sql, [id]);
-    // const comments = result[1];
     const [total_ratings] = result[0];
-    return total_ratings;
+    const comments = result[1];
+    return {
+      ...total_ratings,
+      Comments: comments.map((comment) => comment.Comments),
+    };
   } catch (err) {
     throw err;
   }
@@ -149,7 +152,7 @@ export const update = async (
     PlayerEstimate,
     BackgroundImageURL,
     HeaderImageURL,
-  },
+  }
 ) => {
   const sql = `UPDATE GameInfo SET GameName = ?, Attributes = ?, Description = ?, ReleaseDate = ?, PlatformMac = ?, PlatformWindows = ?, PlatformLinux = ?, Price = ?, RequiredAge = ?, MetaCritic = ?, PlayerEstimate = ?, BackgroundImageURL = ?, HeaderImageURL = ? WHERE GameID = ?`;
   try {

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import GameDetails from "./components/GameDetails";
 import Home from "./components/Home";
-import PageHeader from "./components/PageHeader"
+import PageHeader from "./components/PageHeader";
 import Login from "./components/Login";
 
 function App() {
@@ -13,23 +13,28 @@ function App() {
   return (
     <Router>
       <div>
-        <PageHeader/>
+        <PageHeader />
         <Routes>
-          <Route path="/games/:id" element={<GameDetails />} />
+          <Route
+            path="/games/:id"
+            element={<GameDetails loggedIn={loggedIn} username={username} />}
+          />
           <Route
             path="/"
             element={
               <Home
-                username={username} 
+                username={username}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
-                setUsername={setUsername} 
+                setUsername={setUsername}
               />
             }
           />
           <Route
             path="/login"
-            element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />}
+            element={
+              <Login setLoggedIn={setLoggedIn} setUsername={setUsername} />
+            }
           />
         </Routes>
       </div>
