@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGameById } from "../api/game.js";
 import "./GameDetails.css";
-import CommentForm from "./CommentForm";
-import { postComment, getComments, deleteComment } from "../api/comments";
+import { postComment, getComments } from "../api/comments";
+import { getGameRatings } from "../api/game.js";
 import Vote from "./Vote.js";
+import CommentSection from "./CommentSection";
+
 
 const GameDetails = ({ loggedIn, username }) => {
   const { id } = useParams();
   const [gameData, setGameData] = useState({});
   const [comments, setComments] = useState([]);
+
+  const [ratingsData, setRatingsData] = useState({ Comments: [], Usernames: [] }); // Add this line
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,8 +21,10 @@ const GameDetails = ({ loggedIn, username }) => {
         const results = await getGameById(id);
         setGameData(results.data);
 
-        const commentsData = await getComments(id);
-        setComments(commentsData.data);
+        const ratingsData = await getGameRatings(id);
+        console.log("ratingsData", ratingsData.data);
+        setRatingsData(ratingsData.data); // Update this line
+        setComments(ratingsData.data.Comments);
       } catch (err) {
         console.log(err);
       }
@@ -38,21 +44,13 @@ const GameDetails = ({ loggedIn, username }) => {
         CommentText: commentText,
       });
 
-      const commentsData = await getComments(id);
-      setComments(commentsData.data);
+      const updatedRatingsData = await getGameRatings(id);
+      console.log("updatedRatingsData", updatedRatingsData.data);
+
+      setRatingsData(updatedRatingsData.data);
+      setComments(updatedRatingsData.data.Comments);
     } catch (error) {
       console.error("Error posting comment:", error);
-    }
-  };
-
-  const handleDeleteComment = async (commentId) => {
-    try {
-      console.log("commentId: ", commentId);
-      await deleteComment(commentId);
-      const updatedComments = comments.filter((comment) => comment.id !== commentId);
-      setComments(updatedComments);
-    } catch (error) {
-      console.error("Error deleting comment:", error);
     }
   };
 
@@ -90,21 +88,13 @@ const GameDetails = ({ loggedIn, username }) => {
       </div>
       <div className="user-wrapper">
         <Vote GameID={id} loggedIn={loggedIn} username={username} />
-        <div className="comment-wrapper">
-          <b>Comments ({comments.length}):</b>
-          {comments.map((comment) => (
-            <div key={comment.id} className="comment">
-              <b>{comment.Username}:</b> {comment.CommentText}
-              {loggedIn && comment.Username === username && (
-                <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
-              )}
-            </div>
-          ))}
-          {loggedIn && <CommentForm onSubmit={handleCommentSubmit} />}
-        </div>
-        
+         <CommentSection
+          loggedIn={loggedIn}
+          comments={comments}
+          ratingsData={ratingsData}
+          onSubmit={handleCommentSubmit}
+        />
       </div>
-      
     </div>
   );
 };
