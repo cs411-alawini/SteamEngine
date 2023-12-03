@@ -2,35 +2,57 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGameById } from "../api/game.js";
 import "./GameDetails.css";
+import { postComment, getComments } from "../api/comments";
+import { getGameRatings } from "../api/game.js";
 import Vote from "./Vote.js";
+import CommentSection from "./CommentSection";
+
 
 const GameDetails = ({ loggedIn, username }) => {
   const { id } = useParams();
   const [gameData, setGameData] = useState({});
+  const [comments, setComments] = useState([]);
+
+  const [ratingsData, setRatingsData] = useState({ Comments: [], Usernames: [] }); // Add this line
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const results = await getGameById(id);
-        console.log("results", results);
         setGameData(results.data);
+
+        const ratingsData = await getGameRatings(id);
+        console.log("ratingsData", ratingsData.data);
+        setRatingsData(ratingsData.data); // Update this line
+        setComments(ratingsData.data.Comments);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
-
-  console.log("id", id);
-
-  // const game = backendData.find((game) => game.GameID === parseInt(id));
-
-  // console.log("game", game);
+  }, [id]);
 
   if (!gameData) {
     return <div>Game not found</div>;
   }
 
-  console.log("gameData", gameData);
+  const handleCommentSubmit = async (commentText) => {
+    try {
+      await postComment({
+        GameID: id,
+        Username: username,
+        CommentText: commentText,
+      });
+
+      const updatedRatingsData = await getGameRatings(id);
+      console.log("updatedRatingsData", updatedRatingsData.data);
+
+      setRatingsData(updatedRatingsData.data);
+      setComments(updatedRatingsData.data.Comments);
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
+  };
 
   return (
     <div className="game-page">
@@ -66,19 +88,12 @@ const GameDetails = ({ loggedIn, username }) => {
       </div>
       <div className="user-wrapper">
         <Vote GameID={id} loggedIn={loggedIn} username={username} />
-        <div className="comment-wrapper">
-          <b>Comments (3):</b>
-
-          <div className="comment">
-            <b>Username1:</b> This is a sample comment!
-          </div>
-          <div className="comment">
-            <b>Username2:</b> This is a cool website!
-          </div>
-          <div className="comment">
-            <b>Username3:</b> I like eating crayons!
-          </div>
-        </div>
+         <CommentSection
+          loggedIn={loggedIn}
+          comments={comments}
+          ratingsData={ratingsData}
+          onSubmit={handleCommentSubmit}
+        />
       </div>
     </div>
   );

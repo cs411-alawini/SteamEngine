@@ -9,6 +9,7 @@ export const retrieveGameRatings = async (id) => {
     return {
       ...total_ratings,
       Comments: comments.map((comment) => comment.Comments),
+      Usernames: comments.map((comment) => comment.UserName),
     };
   } catch (err) {
     throw err;
