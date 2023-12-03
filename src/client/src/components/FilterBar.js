@@ -228,6 +228,9 @@ function FilterBar({
           label="Sort By"
           onChange={(e) => setSortBy(e.target.value)}
           variant="standard"
+          style={{
+            color: "white",
+          }}
         >
           <MenuItem value={"MetaCritic"}>MetaCritic</MenuItem>
           <MenuItem value={"ReleaseDate"}>Release Date</MenuItem>
@@ -241,6 +244,9 @@ function FilterBar({
           label="Sort Order"
           onChange={(e) => setSortOrder(e.target.value)}
           variant="standard"
+          style={{
+            color: "white",
+          }}
         >
           <MenuItem value={"ASC"}>Ascending</MenuItem>
           <MenuItem value={"DESC"}>Descending</MenuItem>

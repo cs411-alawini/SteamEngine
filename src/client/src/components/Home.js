@@ -103,20 +103,10 @@ const Home = ({ loggedIn, email, setLoggedIn, setUsername }) => {
   return (
     <>
       <SearchBar keyword={keyword} setKeyword={setKeyword} />
-      {/* <div className="button-wrapper">
-        <Button variant="contained" onClick={fetchBestGames} className="custom-button">
-          Find 'Best' Games
-        </Button>
-      </div>
-      <div className="button-wrapper">
-        <Button variant="contained" onClick={fetchPopularTeenGames} className="custom-button">
-          Find Popular GenZ Games
-        </Button>
-      </div> */}
-      <Button variant="contained" onClick={fetchBestGames} className="custom-button">
+      <Button variant="contained" onClick={fetchBestGames} style={{ marginRight: '8px' }}>
         Find 'Best' Games
       </Button>
-      <Button variant="contained" onClick={fetchPopularTeenGames} className="custom-button">
+      <Button variant="contained" onClick={fetchPopularTeenGames} >
         Find Popular GenZ Games
       </Button>
       <div className="bottom-container">
@@ -147,7 +137,6 @@ const Home = ({ loggedIn, email, setLoggedIn, setUsername }) => {
       <div className="top-right">
         {loggedIn ? (
           <div className="logged-in-user">
-            <p>Your email address is {email}</p>
             <button onClick={handleLogout}>Log Out</button>
           </div>
         ) : (
