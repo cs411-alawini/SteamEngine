@@ -1,12 +1,14 @@
 .page-header {
+    font-family: 'Lato', sans-serif;
     background-color: black;
-    color: white;
+    color: #f5f5f5;
     padding: 10px;
     font-size: 40px;
     font-weight: bold;
     position: sticky;
     width: 100%;
     top: 0px;
+    z-index: 2;
 }
 
 .logo{
