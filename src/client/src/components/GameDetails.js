@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getGameById } from "../api/game.js";
 import "./GameDetails.css";
+import Vote from "./Vote.js";
 
-const GameDetails = () => {
+const GameDetails = ({ loggedIn, username }) => {
   const { id } = useParams();
   const [gameData, setGameData] = useState({});
   useEffect(() => {
@@ -64,15 +65,7 @@ const GameDetails = () => {
         </div>
       </div>
       <div className="user-wrapper">
-        <div className="vote-wrapper">
-          <div className="upvote-button">Upvote</div>
-          <b>
-            User Score:
-            <br />
-            +3
-          </b>
-          <div className="downvote-button">Downvote</div>
-        </div>
+        <Vote GameID={id} loggedIn={loggedIn} username={username} />
         <div className="comment-wrapper">
           <b>Comments (3):</b>
 

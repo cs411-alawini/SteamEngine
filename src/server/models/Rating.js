@@ -6,10 +6,12 @@ export const getVotes = async (gameID) => {
     "SELECT COUNT(*) AS upvotes FROM Rating WHERE GameID = ? AND Vote = 1";
   const sql_downvotes =
     "SELECT COUNT(*) AS downvotes FROM Rating WHERE GameID = ? AND Vote = -1";
+  const all_votes = "SELECT * FROM Rating WHERE GameID = ?";
   try {
     const [[{ upvotes }]] = await db.execute(sql_upvotes, [gameID]);
     const [[{ downvotes }]] = await db.execute(sql_downvotes, [gameID]);
-    return { overall: upvotes - downvotes, upvotes, downvotes };
+    const [all] = await db.execute(all_votes, [gameID]);
+    return { overall: upvotes - downvotes, upvotes, downvotes, all };
   } catch (err) {
     throw err;
   }
