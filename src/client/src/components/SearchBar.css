@@ -5,6 +5,7 @@
     display: inline-block;
     align-items: center;
     min-width: 200px;
+    padding: 10px;
 }
 
 .input-wrapper{

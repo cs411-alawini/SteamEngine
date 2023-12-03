@@ -24,6 +24,7 @@
   background-color: #007bff;
   border-radius: 5px;
   cursor: pointer;
+  z-index: 3;
 }
 
 .top-right button {
@@ -35,6 +36,7 @@
   cursor: pointer;
   border: none;
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 .top-right button:hover {
@@ -60,5 +62,19 @@
 
 .top-right button:hover,
 .login-link:hover {
+  background-color: #0056b3;
+}
+
+/* .button-wrapper {
+  margin-right: 10px; 
+} */
+
+.custom-button {
+  margin-right: 10px;
+  padding: 12px 20px;
+
+}
+
+.custom-button:hover { 
   background-color: #0056b3;
 }
