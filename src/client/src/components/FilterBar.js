@@ -1,4 +1,5 @@
 import React from "react";
+import { getUserInfo } from "../api/user";
 
 import {
   Slider,
@@ -10,6 +11,7 @@ import {
   FormControlLabel,
   Switch,
   Checkbox,
+  Button,
 } from "@mui/material";
 import "./FilterBar.css";
 
@@ -38,6 +40,8 @@ const attributes = [
 ];
 
 function FilterBar({
+  loggedIn,
+  username,
   tags,
   setTags,
   yearRange,
@@ -59,13 +63,27 @@ function FilterBar({
   sortOrder,
   setSortOrder,
 }) {
+  const handleUserPreferencesClick = async () => {
+    try {
+      const results = await getUserInfo(username);
+      const userInfo = results.data;
+      setRequiredAge(userInfo.Age);
+      setMac(userInfo.OwnsMac);
+      setWindows(userInfo.OwnsWindows);
+      setLinux(userInfo.OwnsLinux);
+      setTags(userInfo.FavoriteGenres.split(","));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleSliderChange = (
     event,
     newValue,
     activeThumb,
     value,
     setValue,
-    minDistance,
+    minDistance
   ) => {
     if (!Array.isArray(newValue)) {
       return;
@@ -167,7 +185,7 @@ function FilterBar({
             activeThumb,
             yearRange,
             setYearRange,
-            5,
+            5
           )
         }
         valueLabelDisplay="auto"
@@ -188,7 +206,7 @@ function FilterBar({
             activeThumb,
             priceRange,
             setPriceRange,
-            5,
+            5
           )
         }
         valueLabelDisplay="auto"
@@ -209,7 +227,7 @@ function FilterBar({
             activeThumb,
             metaCriticRange,
             setMetaCriticRange,
-            5,
+            5
           )
         }
         valueLabelDisplay="auto"
@@ -252,6 +270,19 @@ function FilterBar({
           <MenuItem value={"DESC"}>Descending</MenuItem>
         </Select>
       </Stack>
+      {loggedIn && (
+        <Button
+          variant="contained"
+          onClick={handleUserPreferencesClick}
+          style={{
+            color: "white",
+            marginTop: "1rem",
+          }}
+          disabled={!loggedIn}
+        >
+          Fill User Preferences
+        </Button>
+      )}
     </div>
   );
 }
