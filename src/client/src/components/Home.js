@@ -11,7 +11,7 @@ import GameDisplay from "./GameDisplay";
 import FilterBar from "./FilterBar";
 import "./Home.css";
 
-const Home = ({ loggedIn, email, setLoggedIn, setUsername }) => {
+const Home = ({ loggedIn, username, setLoggedIn, setUsername }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [tags, setTags] = useState([]);
@@ -103,15 +103,21 @@ const Home = ({ loggedIn, email, setLoggedIn, setUsername }) => {
   return (
     <>
       <SearchBar keyword={keyword} setKeyword={setKeyword} />
-      <Button variant="contained" onClick={fetchBestGames} style={{ marginRight: '8px' }}>
+      <Button
+        variant="contained"
+        onClick={fetchBestGames}
+        style={{ marginRight: "8px" }}
+      >
         Find 'Best' Games
       </Button>
-      <Button variant="contained" onClick={fetchPopularTeenGames} >
+      <Button variant="contained" onClick={fetchPopularTeenGames}>
         Find Popular GenZ Games
       </Button>
       <div className="bottom-container">
         {isLoading ? <CircularProgress /> : <GameDisplay games={gameResults} />}
         <FilterBar
+          loggedIn={loggedIn}
+          username={username}
           tags={tags}
           setTags={setTags}
           yearRange={yearRange}

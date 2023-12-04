@@ -7,13 +7,15 @@ import { getGameRatings } from "../api/game.js";
 import Vote from "./Vote.js";
 import CommentSection from "./CommentSection";
 
-
 const GameDetails = ({ loggedIn, username }) => {
   const { id } = useParams();
   const [gameData, setGameData] = useState({});
   const [comments, setComments] = useState([]);
 
-  const [ratingsData, setRatingsData] = useState({ Comments: [], Usernames: [] }); // Add this line
+  const [ratingsData, setRatingsData] = useState({
+    Comments: [],
+    Usernames: [],
+  }); // Add this line
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,14 +83,16 @@ const GameDetails = ({ loggedIn, username }) => {
           <p>{"Players: " + gameData.PlayerEstimate}</p>
           <p>
             {"Age Requirement: " +
-              (gameData.RequiredAge == 0 ? "None" : gameData.RequiredAge + "+")}
+              (gameData.RequiredAge === 0
+                ? "None"
+                : gameData.RequiredAge + "+")}
           </p>
           <p>{"Price on Steam: $" + gameData.Price + ".00 USD"}</p>
         </div>
       </div>
       <div className="user-wrapper">
         <Vote GameID={id} loggedIn={loggedIn} username={username} />
-         <CommentSection
+        <CommentSection
           loggedIn={loggedIn}
           comments={comments}
           ratingsData={ratingsData}
