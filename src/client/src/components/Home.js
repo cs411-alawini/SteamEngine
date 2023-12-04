@@ -103,6 +103,7 @@ const Home = ({ loggedIn, username, setLoggedIn, setUsername }) => {
   return (
     <>
       <SearchBar keyword={keyword} setKeyword={setKeyword} />
+      <div className="quick-filters">
       <Button
         variant="contained"
         onClick={fetchBestGames}
@@ -113,6 +114,7 @@ const Home = ({ loggedIn, username, setLoggedIn, setUsername }) => {
       <Button variant="contained" onClick={fetchPopularTeenGames}>
         Find Popular GenZ Games
       </Button>
+      </div>
       <div className="bottom-container">
         {isLoading ? <CircularProgress /> : <GameDisplay games={gameResults} />}
         <FilterBar

@@ -105,3 +105,14 @@
 .logged-in-user p {
   font-size: 14px;
 }
+
+.quick-filters{
+    display: inline-block;
+    align-items: center;
+    min-width: 200px;
+    padding: 10px;
+    position: fixed;
+    top:5px;
+    left: 650px;
+    z-index:100;
+}
