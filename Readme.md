@@ -2,12 +2,12 @@
 
 If you want to run locally:
 
-cd into src/client:
+Cd into src/client:
 `npm install` + 
 `npm start`.
 
-open another terminal.
-cd into src/server:
+Open another terminal.
+Cd into src/server:
 `npm install` + 
 `npm run dev`
 
